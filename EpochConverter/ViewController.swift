@@ -8,12 +8,16 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NSTextFieldDelegate {
 
+    @IBOutlet weak var timeStampAsString: NSTextField!
+    @IBOutlet weak var friendlyDateAsString: NSTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        timeStampAsString.delegate = self
         // Do any additional setup after loading the view.
+
     }
 
     override var representedObject: AnyObject? {
@@ -22,6 +26,8 @@ class ViewController: NSViewController {
         }
     }
 
-
+    @IBAction func convertEpochToFriendly(sender: AnyObject) {
+        self.friendlyDateAsString.stringValue = stringFromEpochDouble(self.timeStampAsString.doubleValue)
+    }
 }
 
