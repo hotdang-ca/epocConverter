@@ -20,14 +20,29 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 
     }
 
-    override var representedObject: AnyObject? {
+    override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }
     }
 
     @IBAction func convertEpochToFriendly(sender: AnyObject) {
-        self.friendlyDateAsString.stringValue = stringFromEpochDouble(self.timeStampAsString.doubleValue)
+        self.friendlyDateAsString.stringValue = stringFromEpochDouble(epochDouble: self.timeStampAsString.doubleValue)
+    }
+    
+    func controlTextDidChange(_ obj: Notification) {
+        let textField = (obj.object as! NSTextField)
+        
+        let fieldValue = textField.stringValue
+        
+        if (fieldValue == "") {
+            self.friendlyDateAsString.stringValue = ""
+            return
+        }
+        
+        let fieldValueAsDouble = Double(fieldValue)
+        
+        self.friendlyDateAsString.stringValue = stringFromEpochDouble(epochDouble: fieldValueAsDouble ?? 0)
     }
 }
 

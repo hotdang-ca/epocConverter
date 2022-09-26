@@ -9,14 +9,14 @@
 import Foundation
 
 func stringFromEpochDouble(epochDouble: Double) -> String {
-    let date = NSDate(timeIntervalSince1970: epochDouble)
-    var dateFormatter = fullFriendlyDateFormatter()
+    let date = Date(timeIntervalSince1970: epochDouble)
+    let dateFormatter = _fullFriendlyDateFormatter()
     
-    return dateFormatter.stringFromDate(date)
+    return dateFormatter.string(from: date)
 }
 
-func fullFriendlyDateFormatter() -> NSDateFormatter {
-    let friendlyDateFormatter = NSDateFormatter()
+func _fullFriendlyDateFormatter() -> DateFormatter {
+    let friendlyDateFormatter = DateFormatter()
     friendlyDateFormatter.dateFormat = "eeee, MMMM dd, yyyy hh:mm:ss xx"
     return friendlyDateFormatter
 }
